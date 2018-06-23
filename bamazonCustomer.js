@@ -70,21 +70,9 @@ function productInfo(){
         productInfo();
     });
 }
-function keepShopping(){
-    
-}
-// Function showing products after initial connection upon startup - then calls up Inquirer productInfo function after listing products
-function showAllProducts(){
-    connection.query("SELECT * FROM products", function (err,res){
-        for (var i = 0; i <res.length; i++){
-            console.log('\nItem ID: ' + res[i].item_id + " | " + 'Product Name: ' + res[i].product_name + " | " + 'Departmen: ' + res[i].department_name + " | " + 'Price: ' + res[i].price.toString() +" | " + 'Quantity In Stock: ' + res[i].stock_quantity.toString());
-        }
-        console.log("-----------------------------------------------");
-        productInfo();
-    });
-}
-// Inquirer prompt asking if user wants to keep shopping - calls showAllProducts if yes; if no, connection ends
-function keepShopping(){
+
+
+ function keepShopping(){
     inquirer.prompt([
         {
             type: "confirm?",
@@ -92,11 +80,12 @@ function keepShopping(){
             name: "confirm"
         }
     ]).then(function (res){
-        if(res.confirm){
-            console.log("-----------------------------------------");
+        if(res.connfirm){
+            console.log("-------------------------");
         }else{
             console.log("Thank you for shopping at Bamazon!");
             connection.end();
         }
     });
+
 }
